@@ -1,0 +1,21 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def search_key(head, key):
+    current = head
+    while current:
+        if current.data == key:
+            return True
+        current = current.next
+    return False
+
+# Example Usage
+head = Node(1)
+head.next = Node(2)
+head.next.next = Node(3)
+head.next.next.next = Node(4)
+
+print(search_key(head, 3))  # Output: True
+print(search_key(head, 5))  # Output: False
