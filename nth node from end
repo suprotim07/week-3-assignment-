@@ -1,0 +1,31 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def get_nth_from_end(head, N):
+    fast = head
+    slow = head
+    
+    # Move fast N steps ahead
+    for _ in range(N):
+        if fast is None:
+            return -1  # N is greater than the length of list
+        fast = fast.next
+    
+    # Move both pointers until fast reaches the end
+    while fast:
+        slow = slow.next
+        fast = fast.next
+    
+    return slow.data if slow else -1
+
+# Example
+head = Node(10)
+head.next = Node(20)
+head.next.next = Node(30)
+head.next.next.next = Node(40)
+head.next.next.next.next = Node(50)
+
+print(get_nth_from_end(head, 2))  # Output: 40
+print(get_nth_from_end(head, 6))  # Output: -1 (doesn't exist)
