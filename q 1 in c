@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to create a new node
+struct Node* createNode(int x) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = x;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Insert at the end and return the head (might change if list was empty)
+struct Node* insertAtEnd(struct Node* head, int x) {
+    struct Node* newNode = createNode(x);
+
+    if (head == NULL) {
+        return newNode;  // New node becomes the head
+    }
+
+    struct Node* current = head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = newNode;
+    return head;
+}
+
+// Utility function to print the list
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf("%d -> ", current->data);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+
+    head = insertAtEnd(head, 1);
+    head = insertAtEnd(head, 2);
+    head = insertAtEnd(head, 3);
+
+    printList(head);  // Output: 1 -> 2 -> 3 -> NULL
+
+    head = insertAtEnd(head, 4);
+    printList(head);  // Output: 1 -> 2 -> 3 -> 4 -> NULL
+
+    return 0;
+}
